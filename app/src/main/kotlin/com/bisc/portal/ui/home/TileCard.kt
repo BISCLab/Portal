@@ -3,6 +3,7 @@ package com.bisc.portal.ui.home
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -81,6 +82,7 @@ fun TileCard(
                             text = tile.label,
                             color = labelTextColor,
                             fontSize = tile.labelFontSize.sp,
+                            lineHeight = (tile.labelFontSize * 1.3f).sp,
                             textAlign = textAlign,
                             fontWeight = fontWeight,
                             fontStyle = fontStyle,
@@ -135,26 +137,31 @@ private fun AutoFitText(
     fontStyle: FontStyle = FontStyle.Normal,
     modifier: Modifier
 ) {
-    var fontSize by remember(tileId, text) { mutableStateOf(200.sp) }
-    var readyToDraw by remember(tileId, text) { mutableStateOf(false) }
-    Text(
-        text = text,
-        color = color,
-        fontSize = fontSize,
-        textAlign = textAlign,
-        fontWeight = fontWeight,
-        fontStyle = fontStyle,
-        overflow = TextOverflow.Clip,
-        softWrap = true,
-        modifier = modifier.drawWithContent { if (readyToDraw) drawContent() },
-        onTextLayout = { result ->
-            if ((result.didOverflowHeight || result.didOverflowWidth) && fontSize.value > 8f) {
-                fontSize = (fontSize.value * 0.85f).sp
-            } else {
-                readyToDraw = true
+    BoxWithConstraints(modifier = modifier) {
+        val maxW = constraints.maxWidth
+        val maxH = constraints.maxHeight
+        var fontSize by remember(tileId, text, maxW, maxH) { mutableStateOf(200.sp) }
+        var readyToDraw by remember(tileId, text, maxW, maxH) { mutableStateOf(false) }
+        Text(
+            text = text,
+            color = color,
+            fontSize = fontSize,
+            lineHeight = (fontSize.value * 1.3f).sp,
+            textAlign = textAlign,
+            fontWeight = fontWeight,
+            fontStyle = fontStyle,
+            overflow = TextOverflow.Clip,
+            softWrap = true,
+            modifier = Modifier.fillMaxSize().drawWithContent { if (readyToDraw) drawContent() },
+            onTextLayout = { result ->
+                if ((result.didOverflowHeight || result.didOverflowWidth) && fontSize.value > 8f) {
+                    fontSize = (fontSize.value * 0.85f).sp
+                } else {
+                    readyToDraw = true
+                }
             }
-        }
-    )
+        )
+    }
 }
 
 @Composable

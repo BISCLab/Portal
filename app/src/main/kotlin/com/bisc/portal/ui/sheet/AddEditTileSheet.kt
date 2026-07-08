@@ -188,7 +188,8 @@ fun AddEditTileSheet(
                     value = label,
                     onValueChange = { label = it },
                     label = { Text("Label") },
-                    singleLine = true,
+                    minLines = 2,
+                    maxLines = 6,
                     modifier = Modifier.fillMaxWidth(),
                     textStyle = TextStyle(
                         color = previewFg,

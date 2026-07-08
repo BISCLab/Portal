@@ -1,0 +1,13 @@
+Portal replaces bloated social media apps with a clean, fullscreen tile grid that opens websites directly in your preferred browser. No accounts. No tracking. No cloud. Just tiles.
+
+Tap a tile and your browser opens — that's the whole idea. The grid is fully customizable: drag to move or resize tiles, lock the layout to prevent accidental changes, and choose between a standard (10x18) or dense (12x24) grid per page. Tile spacing and screen margins are all adjustable. Vertical scroll mode lets tiles extend past the screen height if you need more space.
+
+Tiles support icons from the bundled Simple Icons library (over a thousand SVG logos), your gallery, or plain text. Each tile has its own color, icon zoom, and optional dark mode inversion.
+
+Multiple pages can be swiped horizontally. Page order can be rearranged in settings. Loop mode connects the last page back to the first so you can swipe through continuously.
+
+The bottom bar has five buttons, each with a configurable color and icon. The bar can always be visible, collapse with a swipe, or hide completely and reappear on a gesture.
+
+Other features include app lock with a password and a one-time recovery code, optional click statistics stored locally, JSON backup and restore, and dark, light, and system theme.
+
+Portal requests no permissions at all. URLs are opened via Android Intent — all network activity happens in the browser, not in this app. No external servers are contacted. No analytics, no crash reporting, no telemetry, no Google Play Services dependency. Works on GrapheneOS and other de-Googled devices without modification.

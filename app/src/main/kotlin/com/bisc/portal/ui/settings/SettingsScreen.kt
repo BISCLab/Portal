@@ -4,7 +4,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,9 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -88,7 +85,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.foundation.text.KeyboardOptions
@@ -1259,8 +1255,6 @@ private fun ToggleItem(title: String, subtitle: String, checked: Boolean, onTogg
     }
 }
 
-private val HEADER_BG_PRESETS = listOf("FFFF00", "FF0000", "00FF00", "0000FF", "FFFFFF", "000000")
-
 @Composable
 private fun SectionRow(
     section: Section,
@@ -1269,10 +1263,8 @@ private fun SectionRow(
     onMoveUp: (() -> Unit)? = null,
     onMoveDown: (() -> Unit)? = null
 ) {
-    var showRename          by remember(section.id) { mutableStateOf(false) }
-    var nameInput           by remember(section.id) { mutableStateOf(section.name) }
-    var showIconPicker      by remember(section.id) { mutableStateOf(false) }
-    var showHeaderHsvPicker by remember(section.id) { mutableStateOf(false) }
+    var showRename by remember(section.id) { mutableStateOf(false) }
+    var nameInput  by remember(section.id) { mutableStateOf(section.name) }
 
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(
@@ -1304,24 +1296,6 @@ private fun SectionRow(
         }
 
         Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp)) {
-            Text("Header tile", style = MaterialTheme.typography.bodySmall,
-                 color = MaterialTheme.colorScheme.onSurfaceVariant)
-            Spacer(Modifier.height(4.dp))
-            SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
-                listOf(0 to "Hidden", 1 to "Icon", 2 to "Icon + Text", 3 to "Text").forEachIndexed { idx, (mode, label) ->
-                    SegmentedButton(
-                        selected = section.sectionColumns == mode,
-                        onClick  = {
-                            onUpdate(section.copy(sectionColumns = mode, showName = mode > 0))
-                        },
-                        shape = SegmentedButtonDefaults.itemShape(idx, 4),
-                        label = { Text(label, fontSize = 11.sp) }
-                    )
-                }
-            }
-        }
-
-        Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp)) {
             Text("Grid preset", style = MaterialTheme.typography.bodySmall,
                  color = MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.height(4.dp))
@@ -1337,118 +1311,6 @@ private fun SectionRow(
             }
         }
 
-        AnimatedVisibility(visible = section.sectionColumns > 0) {
-            Column(modifier = Modifier.fillMaxWidth()) {
-                SettingsDivider()
-
-                Row(
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 10.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text("Color", style = MaterialTheme.typography.bodyMedium,
-                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                         modifier = Modifier.width(48.dp))
-                    Row(
-                        modifier = Modifier.horizontalScroll(rememberScrollState()),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        HEADER_BG_PRESETS.forEach { hex ->
-                            val color = hex.hexToColor() ?: Color.Gray
-                            val isSelected = section.headerBgColor.equals(hex, ignoreCase = true)
-                            Box(
-                                modifier = Modifier
-                                    .size(28.dp)
-                                    .clip(CircleShape)
-                                    .background(color)
-                                    .then(
-                                        if (isSelected) Modifier.border(2.dp, MaterialTheme.colorScheme.primary, CircleShape)
-                                        else Modifier
-                                    )
-                                    .clickable { onUpdate(section.copy(headerBgColor = hex)); showHeaderHsvPicker = false }
-                            )
-                        }
-                        Box(
-                            modifier = Modifier
-                                .size(28.dp)
-                                .clip(CircleShape)
-                                .background(
-                                    Brush.sweepGradient(
-                                        listOf(
-                                            Color(0xFFFF0000), Color(0xFFFF8800), Color(0xFFFFFF00),
-                                            Color(0xFF00CC00), Color(0xFF00CCFF), Color(0xFF0000FF),
-                                            Color(0xFF9900FF), Color(0xFFFF0000)
-                                        )
-                                    )
-                                )
-                                .clickable { showHeaderHsvPicker = !showHeaderHsvPicker }
-                        )
-                    }
-                }
-
-                if (showHeaderHsvPicker) {
-                    HsvColorPicker(
-                        hexColor = section.headerBgColor,
-                        onHexChanged = { newHex -> onUpdate(section.copy(headerBgColor = newHex)) },
-                        modifier = Modifier.padding(horizontal = 16.dp)
-                    )
-                    Spacer(Modifier.height(4.dp))
-                }
-
-                SettingsDivider()
-
-                Row(
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text("Corners", style = MaterialTheme.typography.bodyMedium,
-                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                         modifier = Modifier.width(64.dp))
-                    SingleChoiceSegmentedButtonRow(modifier = Modifier.weight(1f)) {
-                        listOf(0 to "■", 4 to "▢", 8 to "⬜", 16 to "◯").forEachIndexed { idx, (dp, label) ->
-                            SegmentedButton(
-                                selected = section.headerRadius == dp,
-                                onClick  = { onUpdate(section.copy(headerRadius = dp)) },
-                                shape    = SegmentedButtonDefaults.itemShape(idx, 4),
-                                label    = { Text(label, fontSize = 14.sp) }
-                            )
-                        }
-                    }
-                }
-
-                SettingsDivider()
-
-                Row(
-                    modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 4.dp, top = 8.dp, bottom = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text("Icon", style = MaterialTheme.typography.bodyMedium,
-                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                         modifier = Modifier.weight(1f))
-                    if (section.headerIcon.isNotBlank()) {
-                        val model: Any = if (section.headerIcon.contains("/"))
-                            "file:///android_asset/${section.headerIcon}"
-                        else section.headerIcon
-                        AsyncImage(
-                            model = model,
-                            contentDescription = null,
-                            modifier = Modifier.size(28.dp),
-                            contentScale = ContentScale.Fit
-                        )
-                        TextButton(onClick = { onUpdate(section.copy(headerIcon = "")) }) {
-                            Text("Remove", style = MaterialTheme.typography.bodySmall)
-                        }
-                    }
-                    IconButton(onClick = { showIconPicker = true }) {
-                        Icon(Icons.Outlined.Image, contentDescription = "Pick icon",
-                             tint = MaterialTheme.colorScheme.primary)
-                    }
-                }
-            }
-        }
-
-        Spacer(Modifier.height(4.dp))
     }
 
     if (showRename) {
@@ -1470,11 +1332,4 @@ private fun SectionRow(
         )
     }
 
-    if (showIconPicker) {
-        IconPickerSheet(
-            onSelect = { icon -> onUpdate(section.copy(headerIcon = icon)); showIconPicker = false },
-            onGallery = { showIconPicker = false },
-            onDismiss = { showIconPicker = false }
-        )
-    }
 }

@@ -1,0 +1,1 @@
+Privacy-first web bookmark launcher with a fullscreen tile grid.

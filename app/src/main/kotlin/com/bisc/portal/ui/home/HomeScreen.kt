@@ -294,7 +294,7 @@ fun HomeScreen(
                                         maxHeightDp = pageMaxH,
                                         unitHDp = pageUnitHDp,
                                         globalAutoInvertIcons = autoInvertIcons,
-                                        sectionHeader = if (swt.section.sectionColumns > 0) swt.section else null,
+                                        sectionHeader = null,
                                         onUpdateSectionHeader = { vm.updateSection(it) },
                                         onTileClick = openTile,
                                         onTileLongClick = { editingTile = it },

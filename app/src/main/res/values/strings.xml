@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Portal</string>
+    <string name="widget_name">Tiny Portal</string>
+    <string name="widget_description">A single bookmark as a home screen icon</string>
+    <string name="row_widget_name">Row Portal</string>
+    <string name="row_widget_description">Five bookmarks in a single row</string>
+</resources>

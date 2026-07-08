@@ -1,0 +1,55 @@
+Categories:
+  - Internet
+  - Productivity
+
+License: GPL-3.0-only
+
+AuthorName: BISC Lab.
+AuthorEmail: bisc.lab@pm.me
+AuthorWebSite: https://github.com/bisclab
+
+Name: Portal
+Summary: Privacy-first web bookmark launcher
+Description: |-
+  Portal replaces bloated social media apps with a clean, fullscreen tile grid
+  that opens websites directly in your preferred browser.
+
+  No accounts. No tracking. No cloud. Just tiles.
+
+  Features:
+
+  * Fullscreen tile grid (Metro / Windows Phone inspired)
+  * Multiple pages with custom names and drag-to-reorder
+  * Per-page grid preset: 10x18 (default) or 12x24 (dense)
+  * Drag-to-move and resize tiles in edit mode
+  * Layout lock to prevent accidental changes
+  * Infinite vertical scroll or fixed-height grid per page
+  * Horizontal page wrap (loop from last back to first)
+  * Custom icons: 1000+ Simple Icons SVG logos, gallery images
+  * Icon zoom slider per tile
+  * Custom icon and color per bottom bar button
+  * Collapsible, always-visible, or hidden bottom bar
+  * App lock with password and one-time reset code
+  * Statistics: optional click tracking, stored locally only
+  * Backup and restore via JSON export/import
+  * Dark / Light / System theme
+  * No Google Play Services required
+  * Works on GrapheneOS and de-Googled devices
+
+  Permissions: INTERNET only — used to open URLs in your browser.
+
+RepoType: git
+Repo: https://github.com/bisclab/portal
+
+Builds:
+  - versionName: 0.1.0
+    versionCode: 1
+    commit: v0.1.0
+    subdir: app
+    gradle:
+      - release
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+CurrentVersion: 0.1.0
+CurrentVersionCode: 1

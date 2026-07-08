@@ -1,0 +1,4 @@
+-keep class com.bisc.portal.data.model.** { *; }
+-keep class com.bisc.portal.data.db.** { *; }
+-keepattributes *Annotation*
+-dontwarn kotlin.**

@@ -36,7 +36,7 @@ Description: |-
   * No Google Play Services required
   * Works on GrapheneOS and de-Googled devices
 
-  Permissions: INTERNET only — used to open URLs in your browser.
+  Permissions: none. URLs are opened via Android Intent — the browser handles the network.
 
 RepoType: git
 Repo: https://github.com/bisclab/portal

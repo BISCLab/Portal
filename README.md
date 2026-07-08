@@ -40,7 +40,7 @@ Portal replaces bloated social media apps with a clean, fullscreen tile grid tha
 - App lock with password and one-time reset code
 
 **Privacy**
-- Zero permissions except `INTERNET`
+- Zero permissions — none at all
 - No Google Play Services, no Firebase, no analytics
 - No crash reporting, no telemetry
 - Works on GrapheneOS and other de-Googled devices
@@ -85,11 +85,9 @@ No API keys, no secret config files required. The project builds as-is.
 
 ## Permissions
 
-| Permission | Reason |
-|------------|--------|
-| `INTERNET` | Opens URLs in the browser |
+None. Portal requests zero permissions.
 
-That is the complete list.
+When you tap a tile, Android hands the URL to your browser via a standard Intent — the browser handles the network connection, not Portal.
 
 ---
 

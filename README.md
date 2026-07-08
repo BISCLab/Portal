@@ -1,101 +1,66 @@
 # Portal
 
-**A privacy-first web bookmark launcher for Android.**
+A privacy-first bookmark launcher for Android. Portal gives you a fullscreen tile grid that opens websites directly in your browser — no tracking, no cloud, no accounts required.
 
-Portal replaces bloated social media apps with a clean, fullscreen tile grid that opens websites directly in your browser — no tracking, no cloud, no accounts.
+---
+
+## What it does
+
+The idea is simple: replace bloated social media apps with clean icon tiles. Tap a tile, your browser opens. That's it.
+
+The grid is fully customizable. Tiles can be moved, resized, and colored freely. Each page has its own layout preset, and the bottom bar buttons can be given custom icons and colors too. Everything stays on your device.
 
 ---
 
 ## Features
 
-**Grid & Layout**
-- Fullscreen tile grid inspired by Windows Phone Metro
-- Multiple pages (sections) with custom names and ordering
-- Per-page grid preset: 10×18 (default) or 12×24 (dense)
-- Adjustable tile spacing, margins (top, bottom, left, right)
-- Infinite vertical scroll mode per layout
-- Horizontal page wrap (loop from last page back to first)
-- Drag-to-move and resize tiles in edit mode
-- Layout lock to prevent accidental changes
+**Grid and tiles**
 
-**Tiles**
-- Open any URL in your preferred browser
-- Custom icons: Simple Icons library (1000+ SVG logos), gallery image, or emoji fallback
-- Icon zoom slider per tile
-- Tile color: any hex color with full color wheel
-- Auto-invert icons in dark mode (per tile or globally)
-- Optional section header tiles (icon, icon+text, or text-only)
+Each page is a grid of tiles. You can drag to move or resize them, lock the layout to prevent accidental changes, and switch between a standard (10×18) or dense (12×24) grid per page. Tile spacing and screen margins are all adjustable. Vertical scroll mode lets tiles extend past the screen height if you need more space.
 
-**Bottom Bar**
-- 5 fully customizable buttons (back, settings, add, info, forward)
-- Color picker per button
-- Custom icon per button (same Simple Icons library as tiles)
-- Collapsible, always-visible, or fully hidden bar with gesture reveal
-- Auto-collapse after a few seconds
+Tiles support icons from the bundled Simple Icons library (thousands of SVG logos), your gallery, or plain text. Each tile has its own color, icon zoom, and optional dark mode inversion.
 
-**Navigation & Behavior**
-- Back/forward arrows with optional dim at page ends
-- Horizontal page wrap (arrows and swipe)
-- Arrow dim toggle (arrows always full opacity option)
-- App lock with password and one-time reset code
+**Navigation**
 
-**Privacy**
-- Zero permissions — none at all
-- No Google Play Services, no Firebase, no analytics
-- No crash reporting, no telemetry
-- Works on GrapheneOS and other de-Googled devices
-- All data stays on-device (Room database + DataStore)
+Multiple pages can be swiped horizontally. Page order can be rearranged in settings. Loop mode connects the last page back to the first so you can swipe through continuously.
 
-**Other**
-- Dark / Light / System theme
-- Statistics: optional click tracking with hourly chart (never leaves device)
-- Backup & restore (JSON export/import)
-- Bitcoin donation support (optional, in-app address display)
+The bottom bar has five buttons, each with a configurable color and icon. The bar can always be visible, collapse with a swipe, or hide completely and reappear on a gesture.
+
+**Everything else**
+
+App lock with a password and a one-time recovery code. Optional click statistics stored locally. JSON backup and restore. Dark, light, and system theme.
 
 ---
 
 ## Install
 
-### F-Droid *(coming soon)*
+**F-Droid** *(coming soon)*
+
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/packages/com.bisc.portal)
 
-### GitHub Releases
-Download the latest APK from the [Releases](https://github.com/bisclab/portal/releases) page.
+**GitHub Releases**
+
+Download the latest APK from the [Releases](https://github.com/BISCLab/Portal/releases) page.
 
 ---
 
 ## Build from source
 
-Requirements: Android Studio Hedgehog or later, JDK 17, Android SDK 35.
+Requires Android Studio Hedgehog or later, JDK 17, Android SDK 35. No API keys or secret config needed.
 
 ```bash
-git clone https://github.com/bisclab/portal.git
-cd portal
+git clone https://github.com/BISCLab/Portal.git
+cd Portal
 ./gradlew assembleRelease
 ```
 
-The debug build can be installed directly:
-```bash
-./gradlew installDebug
-```
-
-No API keys, no secret config files required. The project builds as-is.
-
 ---
 
-## Permissions
+## Privacy and permissions
 
-None. Portal requests zero permissions.
+Portal requests no permissions at all. When you tap a tile, Android passes the URL to your browser via a standard Intent — all network activity happens in the browser, not in this app.
 
-When you tap a tile, Android hands the URL to your browser via a standard Intent — the browser handles the network connection, not Portal.
-
----
-
-## Privacy
-
-Portal does not contact any server on its own. Tile icons are loaded from `file:///android_asset/` (bundled) or from a URI you pick from your gallery. No favicon fetching, no external requests made by the app itself. When you tap a tile, your browser opens the URL — network activity from that point is your browser's.
-
-Statistics (click counts) are stored locally in the app's private database and never leave the device.
+No external servers are contacted. Icons are either bundled with the app or loaded from your gallery. There is no analytics, no crash reporting, no telemetry, and no Google Play Services dependency. The app works on GrapheneOS and other de-Googled devices without modification.
 
 ---
 
@@ -109,4 +74,4 @@ GPL-3.0 — see [LICENSE](LICENSE).
 
 BISC Lab. · [bisc.lab@pm.me](mailto:bisc.lab@pm.me)
 
-Bitcoin donations: `bc1qf6f60r6m6fw9tpagu2u6w440lkvgyc8862hk8c`
+Bitcoin: `bc1qf6f60r6m6fw9tpagu2u6w440lkvgyc8862hk8c`

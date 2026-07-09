@@ -34,7 +34,7 @@ App lock with a password and a one-time recovery code. Optional click statistics
 
 ## Install
 
-**F-Droid** *(coming soon)*
+**F-Droid** *(not yet, but in planning)*
 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/packages/com.bisc.portal)
 

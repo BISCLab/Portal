@@ -1,1 +1,1 @@
-Privacy-first web bookmark launcher with a fullscreen tile grid.
+A beautiful tile grid launcher for your web bookmarks — open in browser, zero permissions.

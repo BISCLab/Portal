@@ -1,13 +1,13 @@
-Portal replaces bloated social media apps with a clean, fullscreen tile grid that opens websites directly in your preferred browser. No accounts. No tracking. No cloud. Just tiles.
+Most smartphone apps request permissions, run background services, and collect user data — even for services that work just as well in a browser. Portal is built on a simple idea: open websites in your browser, not in dedicated apps. But instead of digging through browser bookmarks, you get a beautiful fullscreen tile grid as your personal web launcher.
 
-Tap a tile and your browser opens — that's the whole idea. The grid is fully customizable: drag to move or resize tiles, lock the layout to prevent accidental changes, and choose between a standard (10x18) or dense (12x24) grid per page. Tile spacing and screen margins are all adjustable. Vertical scroll mode lets tiles extend past the screen height if you need more space.
+Yes, you could save all your links as browser bookmarks. Portal is for when you want something that actually looks good, stays organized, and feels like a real home screen.
 
-Tiles support icons from the bundled Simple Icons library (over a thousand SVG logos), your gallery, or plain text. Each tile has its own color, icon zoom, and optional dark mode inversion.
+The grid is fully customizable: drag tiles to move or resize them, pick colors, assign icons from the bundled Simple Icons library (over 1000 SVG logos), your gallery, or plain text. Each tile has its own color, icon zoom, and optional dark-mode inversion. Multiple pages can be swiped horizontally, reordered in settings, and set to loop continuously. A standard (10x18) or dense (12x24) grid layout can be chosen per page, with optional infinite vertical scroll for even more tiles.
 
-Multiple pages can be swiped horizontally. Page order can be rearranged in settings. Loop mode connects the last page back to the first so you can swipe through continuously.
+The bottom bar has five buttons, each with a configurable icon and color. It can be always visible, collapse on scroll, or hide completely.
 
-The bottom bar has five buttons, each with a configurable color and icon. The bar can always be visible, collapse with a swipe, or hide completely and reappear on a gesture.
+App lock lets you protect the launcher with a password and a one-time recovery code — useful if you share a device or just want to keep your setup private.
 
-Other features include app lock with a password and a one-time recovery code, optional click statistics stored locally, JSON backup and restore, and dark, light, and system theme.
+Other features include optional click statistics stored locally, JSON backup and restore, and dark, light, and system theme support.
 
-Portal requests no permissions at all. URLs are opened via Android Intent — all network activity happens in the browser, not in this app. No external servers are contacted. No analytics, no crash reporting, no telemetry, no Google Play Services dependency. Works on GrapheneOS and other de-Googled devices without modification.
+Portal requests zero permissions. Tapping a tile fires an Android Intent — your browser opens the URL, Portal never touches the network. No accounts. No sync. No telemetry. No Google Play Services dependency. Works on GrapheneOS and other de-Googled devices without modification.

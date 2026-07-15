@@ -114,6 +114,7 @@ fun SettingsScreen(
     onNavigateToStats: () -> Unit = {},
     onLockEnabled: () -> Unit = {}
 ) {
+    //region Screen state
     val theme           by vm.theme.collectAsState()
     val bottomSeparator by vm.bottomSeparator.collectAsState()
     val topSeparator    by vm.topSeparator.collectAsState()
@@ -200,6 +201,8 @@ fun SettingsScreen(
         }
     }
 
+    //endregion
+
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
@@ -226,6 +229,7 @@ fun SettingsScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
+            //region Appearance
             item {
                 SettingsSection(
                     icon = Icons.Outlined.Brush,
@@ -243,7 +247,9 @@ fun SettingsScreen(
                     )
                 }
             }
+            //endregion
 
+            //region Grid layout
             item {
                 SettingsSection(
                     icon = Icons.Outlined.Tune,
@@ -299,7 +305,9 @@ fun SettingsScreen(
                     )
                 }
             }
+            //endregion
 
+            //region Navigation
             item {
                 SettingsSection(
                     icon = Icons.AutoMirrored.Outlined.ArrowForward,
@@ -393,7 +401,9 @@ fun SettingsScreen(
                     }
                 }
             }
+            //endregion
 
+            //region Browser
             item {
                 val browsers = remember {
                     val probe = Intent(Intent.ACTION_VIEW, Uri.parse("https://example.com"))
@@ -430,7 +440,9 @@ fun SettingsScreen(
                     }
                 }
             }
+            //endregion
 
+            //region Buttons
             item {
                 SettingsSection(
                     icon = Icons.Outlined.Palette,
@@ -449,7 +461,9 @@ fun SettingsScreen(
                     ColorRow(Icons.AutoMirrored.Outlined.ArrowForward, "Forward arrow", btnColorForward, btnIconForward,  { iconPickerTarget = "forward" },  { vm.setBtnIconForward("") })  { colorPickerTarget = "forward" }
                 }
             }
+            //endregion
 
+            //region Pages
             item {
                 SettingsSection(
                     icon = Icons.Outlined.ViewList,
@@ -502,7 +516,9 @@ fun SettingsScreen(
                     }
                 }
             }
+            //endregion
 
+            //region Statistics
             item {
                 SettingsSection(
                     icon = Icons.Outlined.BarChart,
@@ -540,7 +556,9 @@ fun SettingsScreen(
                     }
                 }
             }
+            //endregion
 
+            //region Backup
             item {
                 SettingsSection(
                     icon = Icons.Outlined.Backup,
@@ -585,7 +603,9 @@ fun SettingsScreen(
                     }
                 }
             }
+            //endregion
 
+            //region App lock
             item {
                 SettingsSection(
                     icon = if (lockEnabled) Icons.Outlined.Lock else Icons.Outlined.LockOpen,
@@ -672,9 +692,11 @@ fun SettingsScreen(
                     }
                 }
             }
+            //endregion
         }
     }
 
+    //region Dialogs & overlays
     colorPickerTarget?.let { target ->
         val current = when (target) {
             "back"     -> btnColorBack
@@ -903,6 +925,7 @@ fun SettingsScreen(
             dismissButton = { TextButton(onClick = { resetLockDialog() }) { Text("Cancel") } }
         )
     }
+    //endregion
 }
 
 @Composable

@@ -29,52 +29,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Tiny Portal widget configuration activity -->
-        <activity
-            android:name=".ui.widget.TinyPortalConfigActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Portal">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-        </activity>
-
-        <!-- Tiny Portal widget provider -->
-        <receiver
-            android:name=".ui.widget.TinyPortalWidget"
-            android:exported="true"
-            android:label="@string/widget_name">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/tiny_portal_widget_info" />
-        </receiver>
-
-        <!-- Row Portal widget configuration activity -->
-        <activity
-            android:name=".ui.widget.RowPortalConfigActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Portal">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-        </activity>
-
-        <!-- Row Portal widget provider -->
-        <receiver
-            android:name=".ui.widget.RowPortalWidget"
-            android:exported="true"
-            android:label="@string/row_widget_name">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/row_portal_widget_info" />
-        </receiver>
-
     </application>
 
 </manifest>

@@ -2,7 +2,7 @@ Most smartphone apps request permissions, run background services, and collect u
 
 Yes, you could save all your links as browser bookmarks. Portal is for when you want something that actually looks good, stays organized, and feels like a real home screen.
 
-The grid is fully customizable: drag tiles to move or resize them, pick colors, assign icons from the bundled Simple Icons library (over 1000 SVG logos), your gallery, or plain text. Each tile has its own color, icon zoom, and optional dark-mode inversion. Multiple pages can be swiped horizontally, reordered in settings, and set to loop continuously. A standard (10x18) or dense (12x24) grid layout can be chosen per page, with optional infinite vertical scroll for even more tiles.
+The grid is fully customizable: drag tiles to move or resize them, pick colors, assign icons from the bundled Simple Icons library (over 1000 open-source SVG logos, used only to help you visually recognize your own bookmarks — Portal is not affiliated with or endorsed by any of the brands shown), your gallery, or plain text. Each tile has its own color, icon zoom, and optional dark-mode inversion. Multiple pages can be swiped horizontally, reordered in settings, and set to loop continuously. A standard (10x18) or dense (12x24) grid layout can be chosen per page, with optional infinite vertical scroll for even more tiles.
 
 The bottom bar has five buttons, each with a configurable icon and color. It can be always visible, collapse on scroll, or hide completely.
 

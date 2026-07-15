@@ -51,21 +51,10 @@ fun IconPickerSheet(
         }.getOrDefault(emptyList())
     }
 
-    val drawableIconNames = remember {
-        if (assetIconPaths.isNotEmpty()) emptyList()
-        else runCatching {
-            context.resources.getStringArray(
-                context.resources.getIdentifier("portal_icons", "array", context.packageName)
-            ).toList()
-        }.getOrDefault(emptyList())
-    }
-
-    val allIcons = remember(assetIconPaths, drawableIconNames) { assetIconPaths + drawableIconNames }
-
-    val filtered = remember(search, allIcons) {
+    val filtered = remember(search, assetIconPaths) {
         val q = search.trim()
-        if (q.isBlank()) allIcons
-        else allIcons.filter {
+        if (q.isBlank()) assetIconPaths
+        else assetIconPaths.filter {
             it.substringAfterLast("/").substringBeforeLast(".").contains(q, ignoreCase = true)
         }
     }
@@ -98,15 +87,10 @@ fun IconPickerSheet(
         ) {
             items(filtered, key = { it }) { name ->
                 val model = remember(name) {
-                    if (name.contains("/")) {
-                        ImageRequest.Builder(context)
-                            .data("file:///android_asset/$name")
-                            .crossfade(true)
-                            .build()
-                    } else {
-                        val resId = context.resources.getIdentifier(name, "drawable", context.packageName)
-                        ImageRequest.Builder(context).data(resId).crossfade(true).build()
-                    }
+                    ImageRequest.Builder(context)
+                        .data("file:///android_asset/$name")
+                        .crossfade(true)
+                        .build()
                 }
                 AsyncImage(
                     model = model,

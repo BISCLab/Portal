@@ -169,22 +169,6 @@ fun IconOnlyContent(tile: Tile, colorFilter: ColorFilter?, modifier: Modifier = 
     val context = LocalContext.current
     val scaledModifier = if (zoom != 1f) modifier.scale(zoom) else modifier
     when {
-        tile.iconAsset.isNotEmpty() && !tile.iconAsset.contains("/") -> {
-            val resId = remember(tile.iconAsset) {
-                context.resources.getIdentifier(tile.iconAsset, "drawable", context.packageName)
-            }
-            if (resId != 0) {
-                AsyncImage(
-                    model = ImageRequest.Builder(context).data(resId).crossfade(true).build(),
-                    contentDescription = tile.label.ifBlank { tile.url },
-                    contentScale = ContentScale.Crop,
-                    colorFilter = colorFilter,
-                    modifier = scaledModifier
-                )
-            } else {
-                FallbackTileContent(tile)
-            }
-        }
         tile.iconAsset.isNotEmpty() -> AsyncImage(
             model = ImageRequest.Builder(context)
                 .data("file:///android_asset/${tile.iconAsset}")

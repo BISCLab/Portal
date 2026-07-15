@@ -73,6 +73,7 @@ fun StatsScreen(
     vm: StatsViewModel = hiltViewModel(),
     onBack: () -> Unit
 ) {
+    //region State & effects
     val stats by vm.stats.collectAsState()
     val statsEnabled by vm.statsEnabled.collectAsState()
     val context = LocalContext.current
@@ -85,6 +86,9 @@ fun StatsScreen(
         message?.let { snackbarHost.showSnackbar(it); message = null }
     }
 
+    //endregion
+
+    //region Stats list (summary, hourly chart, per-tile breakdown)
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         snackbarHost = { SnackbarHost(snackbarHost) },
@@ -280,7 +284,9 @@ fun StatsScreen(
             }
         }
     }
+    //endregion
 
+    //region Clear-all confirmation dialog
     if (showClearDialog) {
         AlertDialog(
             onDismissRequest = { showClearDialog = false },
@@ -297,6 +303,7 @@ fun StatsScreen(
             }
         )
     }
+    //endregion
 }
 
 @Composable

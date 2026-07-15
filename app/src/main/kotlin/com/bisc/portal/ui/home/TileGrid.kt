@@ -70,6 +70,7 @@ fun TileGrid(
     onTileResize: (tile: Tile, newCols: Int, newRows: Int) -> Unit,
     onTileMoveAndResize: (tile: Tile, newCol: Int, newRow: Int, newCols: Int, newRows: Int) -> Unit = { _, _, _, _, _ -> }
 ) {
+    //region Grid geometry setup
     val density = LocalDensity.current
 
     val dragOffsets         = remember { mutableStateMapOf<Long, Offset>() }
@@ -99,7 +100,9 @@ fun TileGrid(
         Box(modifier = Modifier.fillMaxWidth().height(gridH)
             .then(if (editMode) Modifier.systemGestureExclusion() else Modifier)
         ) {
+            //endregion
 
+            //region Tile rendering & drag/resize gestures
             tiles.forEach { tile ->
                 val originX    = tile.gridCol * (unitPx + gapPx)
                 val originY    = tile.gridRow * (unitHPx + gapPx)
@@ -268,6 +271,9 @@ fun TileGrid(
                 }
             }
 
+            //endregion
+
+            //region Section header rendering & drag/resize gestures
             sectionHeader?.let { section ->
                 val hOriginX = section.headerGridCol * (unitPx + gapPx)
                 val hOriginY = section.headerGridRow * (unitHPx + gapPx)
@@ -424,6 +430,7 @@ fun TileGrid(
                     }
                 }
             }
+            //endregion
         }
     }
 }

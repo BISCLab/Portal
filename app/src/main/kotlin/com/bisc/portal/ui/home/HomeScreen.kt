@@ -82,6 +82,7 @@ fun HomeScreen(
     onNavigateToSettings: () -> Unit,
     onNavigateToAbout: () -> Unit
 ) {
+    //region Collected state
     val context       = LocalContext.current
     val density       = LocalDensity.current
     val sections      by vm.sectionsWithTiles.collectAsState()
@@ -113,6 +114,9 @@ fun HomeScreen(
     val btnIconInfo       by vm.btnIconInfo.collectAsState()
     val btnIconForward    by vm.btnIconForward.collectAsState()
 
+    //endregion
+
+    //region Local UI state, pager setup & effects
     var addTargetSectionId   by remember { mutableStateOf<Long?>(null) }
     var editingTile          by remember { mutableStateOf<Tile?>(null) }
     var editMode             by remember { mutableStateOf(false) }
@@ -205,7 +209,9 @@ fun HomeScreen(
 
     // Graph-paper grid colours (need MaterialTheme, computed here)
     val graphLineColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.18f)
+    //endregion
 
+    //region Screen layout (grid, bottom bar)
     Scaffold(
         snackbarHost = {
             SnackbarHost(snackbarHost) { data ->
@@ -441,7 +447,9 @@ fun HomeScreen(
             }
         }
     }
+    //endregion
 
+    //region Add/edit tile sheet
     addTargetSectionId?.let { sectionId ->
         AddEditTileSheet(
             initial = null,
@@ -466,6 +474,7 @@ fun HomeScreen(
             onDismiss = { editingTile = null }
         )
     }
+    //endregion
 }
 
 @Composable

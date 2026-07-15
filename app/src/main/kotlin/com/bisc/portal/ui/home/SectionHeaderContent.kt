@@ -31,14 +31,7 @@ internal fun SectionHeaderContent(section: Section, unitPx: Float) {
 
     fun resolveIconModel(): Any? {
         if (section.headerIcon.isBlank()) return null
-        val resId = if (!section.headerIcon.contains("/"))
-            context.resources.getIdentifier(section.headerIcon, "drawable", context.packageName)
-        else 0
-        return when {
-            section.headerIcon.contains("/") -> "file:///android_asset/${section.headerIcon}"
-            resId != 0 -> resId
-            else -> null
-        }
+        return "file:///android_asset/${section.headerIcon}"
     }
 
     when (mode) {

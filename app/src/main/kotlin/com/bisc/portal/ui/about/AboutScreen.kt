@@ -109,6 +109,7 @@ fun AboutScreen(onBack: () -> Unit) {
 
             Spacer(Modifier.height(20.dp))
 
+            //region App info
             AboutCategoryHeader(
                 icon = Icons.Outlined.Info,
                 iconBg = NeonRed,
@@ -134,6 +135,9 @@ fun AboutScreen(onBack: () -> Unit) {
 
             Spacer(Modifier.height(20.dp))
 
+            //endregion
+
+            //region Developer & support
             AboutCategoryHeader(
                 icon = Icons.Outlined.Person,
                 iconBg = Color(0xFF3D4F73),
@@ -254,6 +258,9 @@ fun AboutScreen(onBack: () -> Unit) {
 
             Spacer(Modifier.height(20.dp))
 
+            //endregion
+
+            //region Privacy & help FAQ
             AboutFAQSection(
                 icon = Icons.Outlined.Lock,
                 iconBg = Color(0xFF2D8FD4),
@@ -357,6 +364,9 @@ fun AboutScreen(onBack: () -> Unit) {
 
             Spacer(Modifier.height(20.dp))
 
+            //endregion
+
+            //region Credits
             AboutCategoryHeader(
                 icon = Icons.Outlined.Star,
                 iconBg = Color(0xFF7B61FF),
@@ -394,6 +404,7 @@ fun AboutScreen(onBack: () -> Unit) {
             }
 
             Spacer(Modifier.height(48.dp))
+            //endregion
         }
 
         Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.navigationBars))

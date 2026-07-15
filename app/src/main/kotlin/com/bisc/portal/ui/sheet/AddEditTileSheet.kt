@@ -152,6 +152,7 @@ fun AddEditTileSheet(
                 .padding(bottom = 32.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
+            //region Mode toggle, URL, label
             Text(
                 if (isEdit) "Edit tile" else "Add tile",
                 style = MaterialTheme.typography.titleMedium
@@ -218,6 +219,9 @@ fun AddEditTileSheet(
                 )
             }
 
+            //endregion
+
+            //region Icon preview & picker trigger
             if (tileMode == 0) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -248,10 +252,6 @@ fun AddEditTileSheet(
                     ) {
                         val previewModel = remember(iconAsset, iconUri) {
                             when {
-                                iconAsset.isNotEmpty() && !iconAsset.contains("/") -> {
-                                    val resId = context.resources.getIdentifier(iconAsset, "drawable", context.packageName)
-                                    if (resId != 0) ImageRequest.Builder(context).data(resId).crossfade(true).build() else null
-                                }
                                 iconAsset.isNotEmpty() ->
                                     ImageRequest.Builder(context).data("file:///android_asset/$iconAsset").crossfade(true).build()
                                 iconUri.isNotEmpty() ->
@@ -273,6 +273,9 @@ fun AddEditTileSheet(
                 }
             }
 
+            //endregion
+
+            //region Icon appearance (background color, invert, zoom)
             HorizontalDivider()
             Text(
                 if (tileMode == 1) "Tile appearance" else "Icon appearance",
@@ -385,6 +388,9 @@ fun AddEditTileSheet(
                 }
             }
 
+            //endregion
+
+            //region Text appearance (color, alignment, size, style)
             if (tileMode != 0) {
                 HorizontalDivider()
                 Text(
@@ -530,6 +536,9 @@ fun AddEditTileSheet(
                 }
             }
 
+            //endregion
+
+            //region Section picker
             if (allSections.size > 1) {
                 ExposedDropdownMenuBox(
                     expanded = sectionExpanded,
@@ -563,6 +572,9 @@ fun AddEditTileSheet(
                 }
             }
 
+            //endregion
+
+            //region Save & delete
             Spacer(Modifier.height(4.dp))
 
             Button(
@@ -613,6 +625,7 @@ fun AddEditTileSheet(
                     Text("Delete tile")
                 }
             }
+            //endregion
         }
     }
 

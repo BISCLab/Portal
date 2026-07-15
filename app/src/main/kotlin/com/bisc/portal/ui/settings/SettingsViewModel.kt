@@ -50,6 +50,7 @@ class SettingsViewModel @Inject constructor(
     private val repo: PortalRepository
 ) : ViewModel() {
 
+    //region Layout & behavior preferences
     val theme = dataStore.data.map { prefs ->
         when (prefs[PrefKeys.THEME]) {
             "DARK"  -> ThemePreference.DARK
@@ -107,10 +108,15 @@ class SettingsViewModel @Inject constructor(
     val barMode = dataStore.data.map { it[HomePrefKeys.BAR_MODE] ?: "collapsible" }
         .stateIn(viewModelScope, SharingStarted.Eagerly, "collapsible")
 
+    //endregion
+
+    //region Sections
     val sections = repo.sectionsWithTiles
         .map { list -> list.sortedBy { it.section.position } }
         .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+    //endregion
 
+    //region Bottom bar button colors & icons
     val btnColorBack = dataStore.data.map { it[HomePrefKeys.BTN_COLOR_BACK]?.hexToColor() ?: DefaultBackColor }
         .stateIn(viewModelScope, SharingStarted.Eagerly, DefaultBackColor)
     val btnColorSettings = dataStore.data.map { it[HomePrefKeys.BTN_COLOR_SETTINGS]?.hexToColor() ?: DefaultSettingsColor }
@@ -165,7 +171,9 @@ class SettingsViewModel @Inject constructor(
     fun setBtnIconAdd(a: String)      = viewModelScope.launch { dataStore.edit { it[HomePrefKeys.BTN_ICON_ADD]      = a } }
     fun setBtnIconInfo(a: String)     = viewModelScope.launch { dataStore.edit { it[HomePrefKeys.BTN_ICON_INFO]     = a } }
     fun setBtnIconForward(a: String)  = viewModelScope.launch { dataStore.edit { it[HomePrefKeys.BTN_ICON_FORWARD]  = a } }
+    //endregion
 
+    //region Theme & grid setters
     fun setTheme(p: ThemePreference) = viewModelScope.launch {
         dataStore.edit { it[PrefKeys.THEME] = p.name }
     }
@@ -188,10 +196,15 @@ class SettingsViewModel @Inject constructor(
         dataStore.edit { it[HomePrefKeys.INFINITE_SCROLL] = on }
     }
 
+    //endregion
+
+    //region Section CRUD
     fun addSection(name: String) = viewModelScope.launch { repo.addSection(name) }
     fun updateSection(s: Section) = viewModelScope.launch { repo.updateSection(s) }
     fun deleteSection(s: Section) = viewModelScope.launch { repo.deleteSection(s) }
+    //endregion
 
+    //region App lock
     val lockEnabled = dataStore.data.map { it[LockPrefKeys.ENABLED] ?: false }
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
@@ -249,6 +262,9 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
+    //endregion
+
+    //region Backup & restore (JSON export/import)
     suspend fun buildExportJson(): String {
         val sections = repo.getAllSections()
         val tiles = repo.getAllTiles()
@@ -415,4 +431,5 @@ class SettingsViewModel @Inject constructor(
             false
         }
     }
+    //endregion
 }
